@@ -32,7 +32,7 @@ public class PrintJobParserTest {
         Collection<PrintJobItem> jobItems = PrintJobParser.parse(input);
         boolean hasBWJob = jobItems.stream().anyMatch(j -> j.getColorType() == ColorType.BLACKWHITE);
         assertTrue("must contain black and white job", hasBWJob);
-        boolean hasColorJob = jobItems.stream().anyMatch(j -> j.getColorType() == ColorType.BLACKWHITE);
+        boolean hasColorJob = jobItems.stream().anyMatch(j -> j.getColorType() == ColorType.COLOR);
         assertTrue("must contain color job", hasColorJob);
 
     }
