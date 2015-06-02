@@ -4,6 +4,19 @@ package com.sen.papercut;
  * Created by sen on 2/06/2015.
  */
 public class PrintingSpec {
+
+    public static final PrintingSpec A4_DOUBLESIDED_COLOR =
+            new PrintingSpec(PageSize.A4, ColorType.COLOR, PrintType.DOUBLESIDED);
+
+    public static final PrintingSpec A4_DOUBLESIDED_BW =
+            new PrintingSpec(PageSize.A4, ColorType.BLACKWHITE, PrintType.DOUBLESIDED);
+
+    public static final PrintingSpec A4_SINGLESIDED_COLOR =
+            new PrintingSpec(PageSize.A4, ColorType.COLOR, PrintType.SINGLESIDED);
+
+    public static final PrintingSpec A4_SINGLESIDED_BW =
+            new PrintingSpec(PageSize.A4, ColorType.BLACKWHITE, PrintType.SINGLESIDED);
+
     private String pageSize;
     private ColorType colorType;
     private PrintType printType;
