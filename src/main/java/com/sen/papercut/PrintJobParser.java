@@ -1,8 +1,8 @@
 package com.sen.papercut;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * Created by sen on 2/06/2015.
@@ -24,11 +24,8 @@ public class PrintJobParser {
 
     private static Collection<PrintJobItem> createJobItems(int colorPages, PrintType printType, int bwPages) {
 
-        PrintJobItem colorJob = new PrintJobItem(ColorType.COLOR, colorPages, printType);
-        PrintJobItem bwJob = new PrintJobItem(ColorType.BLACKWHITE, bwPages, printType);
-        List<PrintJobItem> jobs = new ArrayList<>(2);
-        jobs.add(colorJob);
-        jobs.add(bwJob);
-        return jobs;
+        PrintJobItem colorJob = new PrintJobItem(PageSize.A4, ColorType.COLOR, printType, colorPages);
+        PrintJobItem bwJob = new PrintJobItem(PageSize.A4, ColorType.BLACKWHITE, printType, bwPages);
+        return asList(colorJob, bwJob);
     }
 }
