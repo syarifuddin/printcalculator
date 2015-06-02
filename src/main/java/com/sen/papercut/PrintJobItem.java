@@ -52,6 +52,6 @@ public class PrintJobItem {
         return "PrintJobItem{" +
                 "pages=" + pages +
                 ", printingSpec=" + printingSpec +
-                '}';
+                '}' + '\n';
     }
 }

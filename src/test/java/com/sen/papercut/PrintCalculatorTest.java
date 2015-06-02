@@ -18,7 +18,7 @@ public class PrintCalculatorTest {
                 "502, 22, true",
                 "1, 0, false"
         );
-        lines.stream().flatMap(j -> PrintJobParser.parse(j).stream()).forEach(System.out::println);
+        lines.stream().map(PrintJobParser::parse).forEach(System.out::println);
 //                .collect(Collectors.toMap(Function.identity(), j->j.calculateCost(PrintingCosts::getUnitCostForSpec)))
 //                .forEach((j,c)-> System.out.println("Job :" + j.toString() + " costs:" + c.toString()));
     }
