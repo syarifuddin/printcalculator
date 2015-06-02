@@ -46,4 +46,12 @@ public class PrintJobItem {
     public BigDecimal calculateCost(Function<PrintingSpec, BigDecimal> unitCostFinder) {
         return unitCostFinder.apply(this.printingSpec).multiply(new BigDecimal(this.getPages()));
     }
+
+    @Override
+    public String toString() {
+        return "PrintJobItem{" +
+                "pages=" + pages +
+                ", printingSpec=" + printingSpec +
+                '}';
+    }
 }

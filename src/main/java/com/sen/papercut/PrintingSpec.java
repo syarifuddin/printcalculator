@@ -59,4 +59,13 @@ public class PrintingSpec {
         result = 31 * result + printType.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PrintingSpec{" +
+                "pageSize='" + pageSize + '\'' +
+                ", colorType=" + colorType +
+                ", printType=" + printType +
+                '}';
+    }
 }
