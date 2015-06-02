@@ -5,8 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * Created by sen on 2/06/2015.
@@ -36,6 +35,22 @@ public class PrintJobParserTest {
         assertTrue("must contain black and white job", hasBWJob);
         boolean hasColorJob = Arrays.stream(job.getJobItems()).anyMatch(PrintJobItem::isColor);
         assertTrue("must contain color job", hasColorJob);
+    }
+
+    @Test
+    public void parse_ShouldNot_ReturnColorJob_IfColorPages_IsZero() {
+        String input = "25, 0, false";
+        PrintJob job = PrintJobParser.parse(input);
+        boolean hasColorJob = Arrays.stream(job.getJobItems()).anyMatch(PrintJobItem::isColor);
+        assertFalse("must not contain color job", hasColorJob);
+    }
+
+    @Test
+    public void parse_ShouldNot_ReturnBlackWhiteJob_IfBlackWhitePages_IsZero() {
+        String input = "10, 10, true";
+        PrintJob job = PrintJobParser.parse(input);
+        boolean hasBWJob = Arrays.stream(job.getJobItems()).anyMatch(PrintJobItem::isBlackWhite);
+        assertFalse("must not contain black and white job", hasBWJob);
     }
 
     @Test
