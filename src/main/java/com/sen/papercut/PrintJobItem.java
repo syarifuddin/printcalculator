@@ -1,6 +1,7 @@
 package com.sen.papercut;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -9,6 +10,7 @@ import java.util.function.Function;
 public class PrintJobItem {
     private int pages;
     private PrintingSpec printingSpec;
+    private Optional<BigDecimal> totalCost = Optional.empty();
 
     public PrintJobItem(String pageSize, ColorType colorType, PrintType printType, int pages) {
         this(new PrintingSpec(pageSize, colorType, printType), pages);
@@ -17,6 +19,11 @@ public class PrintJobItem {
     public PrintJobItem(PrintingSpec printingSpec, int pages) {
         this.printingSpec = printingSpec;
         this.pages = pages;
+    }
+
+    public PrintJobItem(PrintJobItem job, BigDecimal totalCost) {
+        this(job.printingSpec, job.pages);
+        this.totalCost = Optional.of(totalCost);
     }
 
     public PrintingSpec getPrintingSpec() {
@@ -43,8 +50,18 @@ public class PrintJobItem {
         return this.printingSpec.getColorType() == ColorType.COLOR;
     }
 
-    public BigDecimal calculateCost(Function<PrintingSpec, BigDecimal> unitCostFinder) {
-        return unitCostFinder.apply(this.printingSpec).multiply(new BigDecimal(this.getPages()));
+    public Optional<BigDecimal> getTotalCost() {
+        return this.totalCost;
+    }
+
+    private String totalCostAsSString() {
+        String cost = totalCost.isPresent() ? totalCost.get().toString() : "N/A";
+        return cost;
+    }
+
+    public PrintJobItem calculateCost(Function<PrintingSpec, BigDecimal> unitCostFinder) {
+        BigDecimal theTotalCost = unitCostFinder.apply(this.printingSpec).multiply(new BigDecimal(this.getPages()));
+        return new PrintJobItem(this, theTotalCost);
     }
 
     @Override
@@ -52,6 +69,7 @@ public class PrintJobItem {
         return "PrintJobItem{" +
                 "pages=" + pages +
                 ", printingSpec=" + printingSpec +
+                ", totalCost=" + totalCostAsSString() +
                 '}' + '\n';
     }
 }

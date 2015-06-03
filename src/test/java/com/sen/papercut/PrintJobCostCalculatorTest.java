@@ -22,8 +22,8 @@ public class PrintJobCostCalculatorTest {
         Function<PrintingSpec, BigDecimal> costFinder = s -> unitCost;
         PrintJobItem job = new PrintJobItem(aPrintingSpec, numberOfPages);
 
-        BigDecimal cost = job.calculateCost(costFinder);
+        PrintJobItem result = job.calculateCost(costFinder);
 
-        assertEquals("Expected cost doesn't match", expectedCost, cost);
+        assertEquals("Expected cost doesn't match", expectedCost, result.getTotalCost().get());
     }
 }

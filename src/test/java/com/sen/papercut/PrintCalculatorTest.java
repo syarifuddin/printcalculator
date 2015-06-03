@@ -2,6 +2,8 @@ package com.sen.papercut;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collection;
 
 import static java.util.Arrays.asList;
@@ -18,7 +20,9 @@ public class PrintCalculatorTest {
                 "502, 22, true",
                 "1, 0, false"
         );
-        lines.stream().map(PrintJobParser::parse).forEach(System.out::println);
+        lines.stream().map(PrintJobParser::parse).flatMap(pj -> Arrays.stream(pj.getJobItems()))
+                .map(ji -> ji.calculateCost(s -> new BigDecimal(0.20)))
+                .forEach(System.out::println);
 //                .collect(Collectors.toMap(Function.identity(), j->j.calculateCost(PrintingCosts::getUnitCostForSpec)))
 //                .forEach((j,c)-> System.out.println("Job :" + j.toString() + " costs:" + c.toString()));
     }
