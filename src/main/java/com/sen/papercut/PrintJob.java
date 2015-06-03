@@ -30,6 +30,11 @@ public class PrintJob {
         return new PrintJob(jobItems);
     }
 
+    public BigDecimal getTotalCosts() {
+        return Arrays.stream(this.jobItems).map(ji -> ji.getTotalCost().orElse(new BigDecimal(0)))
+                .reduce(new BigDecimal(0), (a, b) -> a.add(b));
+    }
+
     @Override
     public String toString() {
         return "PrintJob{\n" +

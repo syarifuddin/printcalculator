@@ -62,4 +62,23 @@ public class PrintJobCostCalculatorTest {
         PrintJob result = job.calculateCosts(costFinder);
         assertTrue(Arrays.stream(result.getJobItems()).allMatch(ji -> ji.getTotalCost().isPresent()));
     }
+
+    @Test
+    public void getTotalCosts_SumAllJobItemCosts() {
+        int bwPages = 20;
+        int colorPages = 10;
+
+        int bwCost = 100;
+        int colorCosts = 75;
+
+        PrintJobItem bwJob = new PrintJobItem(PrintingSpec.A4_SINGLESIDED_BW, bwPages);
+        PrintJobItem colorJob = new PrintJobItem(PrintingSpec.A4_SINGLESIDED_COLOR, colorPages);
+
+        PrintJob job = new PrintJob(
+                new PrintJobItem[]{
+                        new PrintJobItem(bwJob, new BigDecimal(bwCost)),
+                        new PrintJobItem(colorJob, new BigDecimal(colorCosts))
+                });
+        assertEquals("total costs must add up all job item costs", new BigDecimal(bwCost + colorCosts), job.getTotalCosts());
+    }
 }
