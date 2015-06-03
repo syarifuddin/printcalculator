@@ -20,7 +20,7 @@ public class PrintCalculatorTest {
                 "1, 0, false"
         );
         lines.stream().map(PrintJobParser::parse)
-                .map(j -> j.calculateCosts(s -> new BigDecimal(0.20)))
+                .map(j -> j.calculateCosts(s -> new BigDecimal("0.20")))
 //                .map(ji -> ji.calculateCost(s -> new BigDecimal(0.20)))
                 .forEach(System.out::println);
 //                .collect(Collectors.toMap(Function.identity(), j->j.calculateCost(PrintingCosts::getUnitCostForSpec)))

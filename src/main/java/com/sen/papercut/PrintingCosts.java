@@ -14,10 +14,10 @@ public class PrintingCosts {
 
     static {
         PriceList = asList(
-                new PrintingCosts(PrintingSpec.A4_SINGLESIDED_BW, new BigDecimal(0.15)),
-                new PrintingCosts(PrintingSpec.A4_SINGLESIDED_COLOR, new BigDecimal(0.25)),
-                new PrintingCosts(PrintingSpec.A4_DOUBLESIDED_BW, new BigDecimal(0.10)),
-                new PrintingCosts(PrintingSpec.A4_DOUBLESIDED_COLOR, new BigDecimal(0.20))
+                new PrintingCosts(PrintingSpec.A4_SINGLESIDED_BW, new BigDecimal("0.15")),
+                new PrintingCosts(PrintingSpec.A4_SINGLESIDED_COLOR, new BigDecimal("0.25")),
+                new PrintingCosts(PrintingSpec.A4_DOUBLESIDED_BW, new BigDecimal("0.10")),
+                new PrintingCosts(PrintingSpec.A4_DOUBLESIDED_COLOR, new BigDecimal("0.20"))
         );
     }
 
