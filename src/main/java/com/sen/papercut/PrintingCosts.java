@@ -10,7 +10,7 @@ import static java.util.Arrays.asList;
  */
 public class PrintingCosts {
 
-    public static Collection<PrintingCosts> PriceList;
+    public static final Collection<PrintingCosts> PriceList;
 
     static {
         PriceList = asList(
@@ -21,8 +21,8 @@ public class PrintingCosts {
         );
     }
 
-    private PrintingSpec printingSpec;
-    private BigDecimal unitCost;
+    private final PrintingSpec printingSpec;
+    private final BigDecimal unitCost;
 
     public PrintingCosts(PrintingSpec printingSpec, BigDecimal unitCost) {
         this.printingSpec = printingSpec;

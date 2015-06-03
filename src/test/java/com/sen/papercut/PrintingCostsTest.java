@@ -16,8 +16,8 @@ import static junit.framework.Assert.assertEquals;
 @RunWith(value = Parameterized.class)
 public class PrintingCostsTest {
 
-    private PrintingSpec printingSpec;
-    private BigDecimal expectedCosts;
+    private final PrintingSpec printingSpec;
+    private final BigDecimal expectedCosts;
 
     public PrintingCostsTest(PrintingSpec printingSpec, BigDecimal expectedCosts) {
         this.printingSpec = printingSpec;

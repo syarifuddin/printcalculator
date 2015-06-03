@@ -8,8 +8,8 @@ import java.util.function.Function;
  * Created by sen on 2/06/2015.
  */
 public class PrintJobItem {
-    private int pages;
-    private PrintingSpec printingSpec;
+    private final int pages;
+    private final PrintingSpec printingSpec;
     private Optional<BigDecimal> totalCost = Optional.empty();
 
     public PrintJobItem(String pageSize, ColorType colorType, PrintType printType, int pages) {
@@ -55,8 +55,7 @@ public class PrintJobItem {
     }
 
     private String totalCostAsSString() {
-        String cost = totalCost.isPresent() ? totalCost.get().toString() : "N/A";
-        return cost;
+        return totalCost.isPresent() ? totalCost.get().toString() : "N/A";
     }
 
     public PrintJobItem calculateCost(Function<PrintingSpec, BigDecimal> unitCostFinder) {

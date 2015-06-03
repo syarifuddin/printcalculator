@@ -21,7 +21,7 @@ public class PrintJobParser {
         return new PrintJob(createJobItems(colorPages, printType, bwPages));
     }
 
-    private static Collection<PrintJobItem> createJobItems(int colorPages, PrintType printType, int bwPages) {
+    private static PrintJobItem[] createJobItems(int colorPages, PrintType printType, int bwPages) {
         Collection<PrintJobItem> jobs = new ArrayList<>();
         if (colorPages > 0) {
             PrintJobItem colorJob = new PrintJobItem(PageSize.A4, ColorType.COLOR, printType, colorPages);
@@ -31,6 +31,6 @@ public class PrintJobParser {
             PrintJobItem bwJob = new PrintJobItem(PageSize.A4, ColorType.BLACKWHITE, printType, bwPages);
             jobs.add(bwJob);
         }
-        return jobs;
+        return jobs.toArray(new PrintJobItem[jobs.size()]);
     }
 }

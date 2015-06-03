@@ -17,9 +17,9 @@ public class PrintingSpec {
     public static final PrintingSpec A4_SINGLESIDED_BW =
             new PrintingSpec(PageSize.A4, ColorType.BLACKWHITE, PrintType.SINGLESIDED);
 
-    private String pageSize;
-    private ColorType colorType;
-    private PrintType printType;
+    private final String pageSize;
+    private final ColorType colorType;
+    private final PrintType printType;
 
     public PrintingSpec(String pageSize, ColorType colorType, PrintType printType) {
         this.pageSize = pageSize;

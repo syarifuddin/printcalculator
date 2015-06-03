@@ -3,6 +3,7 @@ package com.sen.papercut;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.function.Function;
 
 import static org.junit.Assert.*;
@@ -45,5 +46,20 @@ public class PrintJobCostCalculatorTest {
         PrintJobItem result = job.calculateCost(costFinder);
 
         assertTrue("total Must return non empty after job is calculated", result.getTotalCost().isPresent());
+    }
+
+    @Test
+    public void calculateJobItemCosts_Returns_Costs_For_AllItem() {
+        int bwPages = 20;
+        int colorPages = 10;
+        BigDecimal unitCost = new BigDecimal(20);
+
+        Function<PrintingSpec, BigDecimal> costFinder = s -> unitCost;
+        PrintJobItem bwJob = new PrintJobItem(PrintingSpec.A4_SINGLESIDED_BW, bwPages);
+        PrintJobItem colorJob = new PrintJobItem(PrintingSpec.A4_SINGLESIDED_COLOR, colorPages);
+
+        PrintJob job = new PrintJob(new PrintJobItem[]{bwJob, colorJob});
+        PrintJob result = job.calculateCosts(costFinder);
+        assertTrue(Arrays.stream(result.getJobItems()).allMatch(ji -> ji.getTotalCost().isPresent()));
     }
 }
