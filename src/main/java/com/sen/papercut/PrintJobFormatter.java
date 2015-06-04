@@ -12,7 +12,8 @@ import static java.util.stream.Stream.concat;
  */
 public class PrintJobFormatter {
     public static String PrintHeader() {
-        return "===============================================================\n" +
+        return " Printing Jobs Report                                          \n" +
+                "===============================================================\n" +
                 " Page Size |  Color  | Double Sided | Pages |   Cost    \n" +
                 "===============================================================";
 
@@ -29,12 +30,10 @@ public class PrintJobFormatter {
 
         BigDecimal allJobTotalCosts = jobs.stream().map(PrintJob::getTotalCosts).reduce(new BigDecimal(0), (a, b) -> a.add(b));
         return Stream.of(
-                String.format(
-                        "                                                ================\n" +
-                                "                            Jobs Total Cost:      $ %(,.2f      \n" +
+                String.format("                                                ================\n" +
+                        "                          All Jobs Total Cost:  $ %(,.2f        \n" +
                                 "                                                ================"
-                        ,
-                        allJobTotalCosts));
+                        , allJobTotalCosts));
     }
 
     public static Stream<String> PrintJobTotalCost(PrintJob job) {

@@ -1,5 +1,6 @@
 package com.sen.papercut;
 
+import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -67,5 +68,34 @@ public class PrintJobParserTest {
         PrintJob job = PrintJobParser.parseToPrintJob(input);
         Optional<PrintJobItem> bwJob = Arrays.stream(job.getJobItems()).filter(PrintJobItem::isBlackWhite).findAny();
         assertEquals("must return the correct number of black and white pages", 480, bwJob.get().getPages());
+    }
+
+    @Test(expected = InvalidFormat.class)
+    public void invalidInputLineString() {
+        String input = "5022true";
+        PrintJobParser.parseToPrintJob(input);
+        Assert.fail("should have thrown InvalidFormat exception");
+    }
+
+    @Test(expected = InvalidFormat.class)
+    public void invalidTotalPagesLineString() {
+        String input = "XYZ, 22, true";
+        PrintJobParser.parseToPrintJob(input);
+        Assert.fail("should have thrown InvalidFormat exception");
+    }
+
+    @Test()
+    public void upperCaseBoolean_ShouldBeAccepted() {
+        String input = "52, 22, TRUE";
+        PrintJob job = PrintJobParser.parseToPrintJob(input);
+        Assert.assertTrue("Should convert uppercase 'TRUE' string to boolean true",
+                Arrays.stream(job.getJobItems()).allMatch(PrintJobItem::isDoubleSided));
+    }
+
+    @Test(expected = InvalidFormat.class)
+    public void totalPagesLessThanColorPages() {
+        String input = "22, 100, TRUE";
+        PrintJob job = PrintJobParser.parseToPrintJob(input);
+        Assert.fail("Total pages should be less than color pages");
     }
 }
