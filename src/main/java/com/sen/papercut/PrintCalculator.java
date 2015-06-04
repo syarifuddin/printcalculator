@@ -42,11 +42,9 @@ public class PrintCalculator
         String filePath;// create a scanner so we can read the command-line input
         Scanner scanner = new Scanner(System.in);
 
-        //  prompt for the user's name
         System.out.println("Cannot read input file.");
-        System.out.print("Please enter the input file path:");
 
-        // get their input as a String
+        System.out.print("Please enter the input file path:");
         filePath = scanner.next();
         return makeAbsolutePath(filePath);
 
@@ -63,7 +61,7 @@ public class PrintCalculator
 
     private static List<PrintJob> readPrintJobFrom(Path filePath) throws IOException {
 
-        return Files.lines(filePath).map(PrintJobParser::parseToPrintJob)
+        return Files.lines(filePath).filter(s -> s.trim().length() > 0).map(PrintJobParser::parseToPrintJob)
                 .map(j -> j.calculateCosts(PrintingCosts::getUnitCostForSpec))
                 .collect(Collectors.toList());
     }
