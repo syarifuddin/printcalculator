@@ -7,3 +7,6 @@ mvn package
 
 To run the program:
 java -jar target/printcalculator-1.0-SNAPSHOT.jar "<inputfilepath>"
+
+To run the unit test:
+mvn test
