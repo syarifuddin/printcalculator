@@ -31,21 +31,6 @@ public class PrintingCostsTest {
                 .collect(Collectors.toList());
     }
 
-//
-//    @Test
-//    public void unitCostsTest() {
-//        PrintingSpec a4DoubleSidedBw = new PrintingSpec(PageSize.A4, ColorType.BLACKWHITE, PrintType.DOUBLESIDED);
-//        assertEquals(new BigDecimal(0.10), PrintingCosts.getUnitCostForSpec(a4DoubleSidedBw));
-//        PrintingSpec a4DoubleSidedColor = new PrintingSpec(PageSize.A4, ColorType.COLOR, PrintType.DOUBLESIDED);
-//        assertEquals(new BigDecimal(0.20), PrintingCosts.getUnitCostForSpec(a4DoubleSidedColor));
-//        PrintingSpec a4SingleSidedBw = new PrintingSpec(PageSize.A4, ColorType.BLACKWHITE, PrintType.SINGLESIDED);
-//        assertEquals(new BigDecimal(0.15), PrintingCosts.getUnitCostForSpec(a4SingleSidedBw));
-//
-//        PrintingSpec a4SingleSidedColor = new PrintingSpec(PageSize.A4, ColorType.COLOR, PrintType.SINGLESIDED);
-//        assertEquals(new BigDecimal(0.25), PrintingCosts.getUnitCostForSpec(a4SingleSidedColor));
-//    }
-
-
     @Test
     public void unitCostForPrintSpec() {
         BigDecimal unitCost = PrintingCosts.getUnitCostForSpec(printingSpec);
