@@ -10,9 +10,14 @@ import static junit.framework.Assert.assertTrue;
  */
 public class FilePathUtilsTest {
 
+    public static boolean isWindows() {
+        return (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0);
+
+    }
+
     @Test
     public void absolutePathTest() {
-        String path = "/abc/def/gh.txt";
+        String path = isWindows() ? "C:/abc/def.txt" : "/abc/def/gh.txt";
         assertTrue("Absolute path must return true", FilePathUtils.isAbsolutePath(path));
     }
 
@@ -27,5 +32,4 @@ public class FilePathUtilsTest {
         String path = "someSubPath/gh.txt";
         assertFalse("relative path must return false", FilePathUtils.isAbsolutePath(path));
     }
-
 }
