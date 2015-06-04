@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 public class PrintJobParser {
 
-    public static PrintJob parse(String line) {
+    public static PrintJob parseToPrintJob(String line) {
         String[] s = line.split(", ");
 
         int totalPages = Integer.parseInt(s[0]);

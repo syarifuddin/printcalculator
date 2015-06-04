@@ -19,7 +19,7 @@ public class PrintCalculatorTest {
                 "502, 22, true",
                 "1, 0, false"
         );
-        lines.stream().map(PrintJobParser::parse)
+        lines.stream().map(PrintJobParser::parseToPrintJob)
                 .map(j -> j.calculateCosts(s -> new BigDecimal("0.20")))
 //                .map(ji -> ji.calculateCost(s -> new BigDecimal(0.20)))
                 .forEach(System.out::println);
