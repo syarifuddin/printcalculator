@@ -98,4 +98,17 @@ public class PrintJobParserTest {
         PrintJob job = PrintJobParser.parseToPrintJob(input);
         Assert.fail("Total pages should be less than color pages");
     }
+
+    @Test
+    public void commaDelimiterWithoutSpace_ShouldBeParsed_Succesfully() {
+        String input = "19,2,TRUE";
+        PrintJob job = PrintJobParser.parseToPrintJob(input);
+    }
+
+    @Test(expected = InvalidFormat.class)
+    public void lineContainsLessThanThreeFields_ShouldThrowError() {
+        String input = "19, 2";
+        PrintJob job = PrintJobParser.parseToPrintJob(input);
+        Assert.fail("line contains less than three fields should throw error");
+    }
 }

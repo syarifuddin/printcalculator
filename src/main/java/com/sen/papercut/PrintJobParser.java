@@ -10,20 +10,15 @@ public class PrintJobParser {
 
     public static PrintJob parseToPrintJob(String line) throws InvalidFormat {
         try {
-            String[] s = line.split(", ");
+            String[] s = line.split(", |,");
+            validateSplitLength(line, s);
+
             int totalPages = Integer.parseInt(s[0]);
             int colorPages = Integer.parseInt(s[1]);
 
-            if (totalPages < colorPages) {
-                throw new InvalidFormat(String.format(
-                        "the total pages %d cannot be less than color pages %d in line: \"%s\"",
-                        totalPages, colorPages, line
-                ));
-            }
+            validatePagesNumber(line, totalPages, colorPages);
 
-            if (!isValidBooleanString(s[2])) {
-                throw new InvalidFormat(String.format("incorrect boolean format in this line \"%s\"", line));
-            }
+            validateBooleanString(line, s[2]);
             boolean doubleSided = Boolean.parseBoolean(s[2]);
 
             PrintType printType = doubleSided ? PrintType.DOUBLESIDED : PrintType.SINGLESIDED;
@@ -34,6 +29,28 @@ public class PrintJobParser {
             throw new InvalidFormat(String.format("incorrect format in this line \"%s\"", line));
         }
 
+    }
+
+    private static void validateSplitLength(String line, String[] s) {
+        if (s.length < 3) {
+            throw new InvalidFormat(String.format("incorrect format in this line \"%s\", " +
+                    "line must have 3 fields separated by comma e.g \"90, 20, true\"", line));
+        }
+    }
+
+    private static void validateBooleanString(String line, String booleanString) {
+        if (!isValidBooleanString(booleanString)) {
+            throw new InvalidFormat(String.format("incorrect boolean format in this line \"%s\"", line));
+        }
+    }
+
+    private static void validatePagesNumber(String line, int totalPages, int colorPages) {
+        if (totalPages < colorPages) {
+            throw new InvalidFormat(String.format(
+                    "the total pages %d cannot be less than color pages %d in line: \"%s\"",
+                    totalPages, colorPages, line
+            ));
+        }
     }
 
     private static PrintJobItem[] createJobItems(int colorPages, PrintType printType, int bwPages) {
